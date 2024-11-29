@@ -22,6 +22,17 @@ related:
 The `lightwave` {% term integration %} links Home Assistant with your Lightwave WiFi link for controlling Lightwave lights, switches and TRVs.
 
 This integration uses the official API published by Lightwave on their website [https://api.lightwaverf.com/](https://api.lightwaverf.com/).
+
+If you haven't already, you must first register your home assistant hardware with the lightwave hub.  For this you will need the hub's IP address and physical access to the hub.  
+
+Once you have the IP address, start a terminal in home assistant and issue the following command -
+
+`echo -ne '100,!F*p.' | nc -u 192.168.1.12 9760`
+
+where 192.168.1.12 is your hub IP address
+
+You have 12 seconds to push the button on your hub to accept the registration.
+
 To add your Lightwave devices into your Home Assistant installation, add the following to your {% term "`configuration.yaml`" %} file.
 {% include integrations/restart_ha_after_config_inclusion.md %}
 
@@ -105,8 +116,6 @@ Where IP_ADDRESS is the IP address of your Lightwave hub.
 Each `switch` or `light` requires an `id` and a `name`. The `id` takes the form `R#D#` where `R#` is the room number and `D#` is the device number.
 
 `lights` and `switches` are optional but one of these must be present.
-
-The first use of a light or switch will try to register with your Lightwave WiFi Link hub. If the hub has not been registered a message on your hub will be displayed asking you to pair the device. You have 12 seconds to push the button on your hub to accept this. Once done, you should be able to control your lights and switches via Home Assistant. This only needs to be done if the hub has not been registered.
 
 # TRVs
 
